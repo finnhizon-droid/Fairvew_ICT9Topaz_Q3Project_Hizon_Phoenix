@@ -9,7 +9,7 @@
 
     <style>
          body {
-            background-image: url('https://images.squarespace-cdn.com/content/v1/664c7ae50eea9c731b37e817/ee62633f-ffa1-4db9-b3fd-96f21033d690/DSC06610.jpg');
+            background-image: url('');
             background-size: cover;
             background-repeat: no-repeat;
              }
@@ -21,11 +21,15 @@
 
 
 
-      .picture1{
+      .map{
           width: 450px;
            height: 400px;
-           margin-left: 515px;
+           margin-left: 350px;
               }
+
+      .button{
+        margin-left: 670px;
+      }
     </style>
 
 
@@ -33,11 +37,10 @@
 </head>
 <body>
     
-
 <nav class="navbar navbar-expand-lg navbar-black bg-light">
   <div class="container-fluid">
 
-    <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQchdgIeG7ozkE0TV__FakwgnYka2ouCJgzNg&s" alt="oblogo" class="rounded-circle img-fluid" id="logo"></a>
+    <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjYKb-alckRyBDwSHildabBgDW_mlSNiFmHg&s" alt="oblogo" class="rounded-circle img-fluid" id="logo"></a>
 
 
 
@@ -65,39 +68,96 @@
 <br><br>
 
 <div class="container-fluid bg-dark">
-  <br>
- 
-  <br>
-<div class="container bg-light text-dark text-center">
- North Avenue (North)
-</div>
-<br>
-<br>
-<a class="navbar-brand" href=""><img src="file:///C:/Users/Nathan%20Rafael%20Ladion/Pictures/Screenshots/Screenshot%202026-02-23%20204810.png"  class="picture1"></a>
-<br>
-<br>
-<div class="container bg-light text-dark text-center">
-    Taft Avenue (South)
-</div>
-<br>
-<p id="answers" class="text-center bg-light container">Fare Price (24 Kilometers) </p>
-<br>
- <div class="text-center">
-     <button type="" class="btn btn-light" onclick="document.getElementById('answers').innerHTML = Normal_Fair;">Normal Fair</button>
-    <button type="" class="btn btn-light" onclick="document.getElementById('answers').innerHTML = Discounted_Fair;">Discounted Fair</button>
-    </div>
-<br>
-</div>
-   
-    <script>
-        var Normal_Fair = 380;
-        var Discounted_Fair = 304;
 
-          document.getElementById("head1").innerHTML = head_1
+<script>
+        function calculateFare() {
+            let pickup, dropoff, basefare, baseKM, perKMrate, distance, extraKM, discount;
+            pickup = parseFloat(document.getElementById("pickup").value);
+            dropoff = parseFloat(document.getElementById("dropoff").value);
+            basefare = 50;
+            perKMrate = 15;
+            baseKM = 2;
+            discount = document.getElementById("disc").checked;
+
+            distance = Math.max(Math.abs(dropoff - pickup), 0);
+            extraKM = Math.max(distance - baseKM, 0);
+
+            let fare = basefare + extraKM * perKMrate;
+            fare = fare * (1 - 0.2 * discount); <!--0.2 meaning 20%-->
+
+            document.getElementById("DisplayAns").innerHTML = "₱" + fare.toFixed(2);
+        }
     </script>
 
+<br>
 
+  <div class="text-light">
+     <h1 class="text-center">Fare Calculator</h1>
+
+    <label for="pickup">Pickup Station:</label>
+<select id="pickup">
+     <!-- Line 1-->
+        <option value="0">Roosevelt</option>
+        <option value="20">Baclaran</option> <!-- ~20 km from Roosevelt -->
+    
+     <!-- Line 2-->
+        <option value="0">Santolan</option>
+        <option value="13">Recto</option> <!-- ~13 km from Santolan -->
+  
+     <!-- Line 3-->
+        <option value="0">North Avenue</option>
+        <option value="17">Taft Avenue</option> <!-- ~17 km from North Avenue -->
+    </div>
+</select>
+
+    <!-- I used AI(Copilot) to get the distances from one station to another(as whole number values) for efficiency purposes.
+     
+        - Nathan Ladion -->
+
+    <br>
+    <br>
+
+    <label for="dropoff">Dropoff Station:</label>
+<select id="dropoff">
+    <!-- Line 1-->
+        <option value="0">Roosevelt</option>
+        <option value="20">Baclaran</option>
+    
+     <!-- Line 2-->
+        <option value="0">Santolan</option>
+        <option value="13">Recto</option>
+  
+     <!-- Line 3-->
+        <option value="0">North Avenue</option>
+        <option value="17">Taft Avenue</option>
+
+</select>
+
+
+    <br>
+    <br>
+
+      <label for="disc">
+         <input type="checkbox" id="disc"> Apply 20% Discount
+         <!--This took me about 30 minutes because I forgot about checkboxes. Discounts are never gonna be seen again in my outputs(hopefully)-->
+      </label>
+       
+    
+
+    <br>
+     <a class="map"><img src="file:///C:/Users/Nathan%20Rafael%20Ladion/Pictures/Screenshots/Screenshot%202026-02-24%20181344.png"></a>
+    <br>
+    <br>
+    <button class="button" onclick="calculateFare()">Calculate Fare</button>
+
+    <div class="container">
+      <h6 id="DisplayAns" class="text-center">Total Fair</h6>
+    </div>
+    
+    <br>
+  
+  </div>
+   
 
 </body>
 </html>
-

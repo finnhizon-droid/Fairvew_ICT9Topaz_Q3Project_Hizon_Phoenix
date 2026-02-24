@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" >
+
+    <style>
+         body {
+            background-image: url('https://images.squarespace-cdn.com/content/v1/664c7ae50eea9c731b37e817/ee62633f-ffa1-4db9-b3fd-96f21033d690/DSC06610.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+             }
+
+      .navbar-brand img, #logo { width:48px; height:48px; object-fit:cover; }
+      .navbar { padding-top:0.25rem; padding-bottom:0.25rem; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-black bg-light">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQchdgIeG7ozkE0TV__FakwgnYka2ouCJgzNg&s" alt="oblogo" class="rounded-circle img-fluid" id="logo"></a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="home.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="page2.1.html">Registration Form</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="page3.1.html">Confirmation Page</a>
+        </li>
+      </ul>
+
+      <form class="d-flex">
+        <input class="form-control me-2" type="text" placeholder="Search">
+        <button class="btn btn-outline-primary" type="button">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<br><br>
+
+<div class="d-flex align-items-center justify-content-center" style="min-height:60vh;">
+  <div class="card p-4 bg-dark bg-opacity-50 text-white" style="max-width:700px; width:100%;">
+    <h1 class="mb-3">Register Form</h1>
+    <p>Input all the necessary information, then click submit. To change the profile image, click the placeholder at the bottom. </p>
+
+    
+    <div class="text-center mb-3">
+      <label for="profileInput" class="d-inline-block rounded-circle overflow-hidden" style="width:120px;height:120px;background:#ccc;cursor:pointer;border:3px solid rgba(255,255,255,0.15);">
+        <img id="profilePreview" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Profile preview" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </label>
+      <input id="profileInput" type="file" accept="image/*" style="display:none">
+    </div>
+
+    <form>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input id="name" name="name" type="text" class="form-control" placeholder="E.G: John Jane Doe" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="birthday" class="form-label">Birthday (Month/Day/Year)</label>
+        <input id="birthday" name="birthday" type="text" inputmode="numeric" maxlength="8" pattern="^\d{2}\/\d{2}\/\d{2}$" placeholder="MM/DD/YY" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="contact" class="form-label">Contact Number</label>
+        <input id="contact" name="contact" type="tel" class="form-control" placeholder="0917-6767-676" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="username" class="form-label">Enter Desired Username</label>
+        <input id="username" name="username" type="text" class="form-control" placeholder="E.G: Professor Poopy Pants" required>
+      </div>
+
+      <div class="mb-3">        <label for="email" class="form-label">Email</label>
+        <input id="email" name="email" type="email" class="form-control" placeholder="E.G: user@gmail.com" required>
+      </div>
+
+      <div class="mb-3">        <label for="password" class="form-label">Password <small class="text-warning">(BE SURE TO REMEMBER THE ENTERED PASSWORD)</small></label>
+        <div class="input-group">
+          <input id="password" name="password" type="password" class="form-control" required>
+          <button class="btn btn-outline-light" type="button" id="togglePassword" aria-label="Show password">Show</button>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const b = document.getElementById('birthday');
+    const c = document.getElementById('contact');
+
+    b?.addEventListener('input', function(){
+      let digits = this.value.replace(/\D/g,'').slice(0,6);
+      const parts = [];
+      digits.length > 0 && parts.push(digits.slice(0,2));
+      digits.length > 2 && parts.push(digits.slice(2,4));
+      digits.length > 4 && parts.push(digits.slice(4,6));
+      this.value = parts.join('/');
+    });
+    b?.addEventListener('paste', function(e){
+      e.preventDefault();
+      const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,'').slice(0,6);
+      const parts = [];
+      paste.length > 0 && parts.push(paste.slice(0,2));
+      paste.length > 2 && parts.push(paste.slice(2,4));
+      paste.length > 4 && parts.push(paste.slice(4,6));
+      this.value = parts.join('/');
+    });
+
+    c?.addEventListener('input', function(){
+      this.value = this.value.replace(/\D/g,'').slice(0,15);
+    });
+    c?.addEventListener('paste', function(e){
+      e.preventDefault();
+      const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,'').slice(0,15);
+      this.value = paste;
+    });
+
+    const toggle = document.getElementById('togglePassword');
+    const pwd = document.getElementById('password');
+    toggle?.addEventListener('click', function(){
+      const isPwd = pwd.getAttribute('type') === 'password';
+      pwd.setAttribute('type', isPwd ? 'text' : 'password');
+      this.textContent = isPwd ? 'Hide' : 'Show';
+      this.setAttribute('aria-pressed', isPwd ? 'true' : 'false');
+    });
+
+    const profileInput = document.getElementById('profileInput');
+    const preview = document.getElementById('profilePreview');
+    profileInput?.addEventListener('change', function(){
+      const file = this.files?.[0];
+      file && (() => {
+        const reader = new FileReader();
+        reader.onload = function(e){ preview && (preview.src = e.target.result); };
+        reader.readAsDataURL(file);
+      })();
+    });
+  })();
+</script>
+
+</body>
+</html>

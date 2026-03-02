@@ -24,11 +24,11 @@
       .map{
           width: 450px;
            height: 400px;
-           margin-left: 350px;
+           margin-left: 410px;
               }
 
       .button{
-        margin-left: 670px;
+        margin-left: 750px;
       }
     </style>
 
@@ -51,9 +51,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="page2.1.html">Registration Form</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="page3.1.html">Confirmation Page</a>
         </li>
       </ul>
 
@@ -92,8 +89,11 @@
 <br>
 
   <div class="text-light">
-     <h1 class="text-center">Fare Calculator</h1>
 
+    <div class="text-light">
+       <h1 class="text-center">Fare Calculator</h1>
+    </div>
+    
     <label for="pickup">Pickup Station:</label>
 <select id="pickup">
      <!-- Line 1-->
@@ -110,7 +110,7 @@
     </div>
 </select>
 
-    <!-- I used AI(Copilot) to get the distances from one station to another(as whole number values) for efficiency purposes.
+    <!-- I used AI(Copilot) to get the distances from one station to another (as whole number values) for efficiency purposes.
      
         - Nathan Ladion -->
 
@@ -148,9 +148,9 @@
      <a class="map"><img src="file:///C:/Users/Nathan%20Rafael%20Ladion/Pictures/Screenshots/Screenshot%202026-02-24%20181344.png"></a>
     <br>
     <br>
-    <button class="button" onclick="calculateFare()">Calculate Fare</button>
+    <button class="button text-center" onclick="calculateFare()">Calculate Fare</button>
 
-    <div class="container">
+    <div class="container" for="DisplayAns">
       <h6 id="DisplayAns" class="text-center">Total Fair</h6>
     </div>
     
